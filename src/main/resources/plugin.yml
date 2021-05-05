@@ -1,0 +1,20 @@
+name: Hardcore_Multiplayer
+version: ${project.version}
+main: io.github.drakodas.hardcoremultiplayer.HardcoreMultiplayer
+api-version: 1.16
+authors: [ Drakodas ]
+description: Simple Plugin for a Hardcore Multiplayer Server, with the ability to revives player
+
+commands:
+  revive:
+    description: Revives a player
+    aliases: ["rv"]
+  test:
+    description: Revives a player
+    aliases: [ "tst" ]
+
+permissions:
+  io.github.drakodas.hardcoremultiplayer.revive:
+    description: Player can revive players
+    default: op
+
