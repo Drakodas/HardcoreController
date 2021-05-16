@@ -9,9 +9,9 @@ commands:
   revive:
     description: Revives a player
     aliases: ["rv"]
-  test:
-    description: Revives a player
-    aliases: [ "tst" ]
+  addlives:
+    description: Addes lives to a player
+    aliases: [ "al" ]
 
 permissions:
   io.github.drakodas.hardcoremultiplayer.revive:

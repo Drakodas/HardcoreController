@@ -1,28 +1,21 @@
 package io.github.drakodas.hardcoremultiplayer;
 
+import io.github.drakodas.hardcoremultiplayer.commands.AddLives;
 import io.github.drakodas.hardcoremultiplayer.commands.Revive;
-import io.github.drakodas.hardcoremultiplayer.commands.Test;
-import io.github.drakodas.hardcoremultiplayer.events.OnDeath;
-import io.github.drakodas.hardcoremultiplayer.events.OnJoin;
-import io.github.drakodas.hardcoremultiplayer.events.OnRevive;
+import io.github.drakodas.hardcoremultiplayer.events.*;
 import io.github.drakodas.hardcoremultiplayer.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.print.attribute.ResolutionSyntax;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 public final class HardcoreMultiplayer extends JavaPlugin {
 
@@ -45,7 +38,6 @@ public final class HardcoreMultiplayer extends JavaPlugin {
         this.register();
         this.createFiles();
         this.saveDefaultConfig();
-        this.loadArmorstands();
         log("Plugin loaded");
     }
 
@@ -70,10 +62,13 @@ public final class HardcoreMultiplayer extends JavaPlugin {
         pluginManager.registerEvents(new OnJoin(), this);
         pluginManager.registerEvents(new OnDeath(), this);
         pluginManager.registerEvents(new OnRevive(), this);
+        pluginManager.registerEvents(new OnRefill(), this);
+        pluginManager.registerEvents(new OnMove(), this);
+        pluginManager.registerEvents(new OnPlayerJoinArmorstandModify(), this);
 
         //Registers Commands
         Objects.requireNonNull(Bukkit.getPluginCommand("revive")).setExecutor(new Revive());
-        Objects.requireNonNull(Bukkit.getPluginCommand("test")).setExecutor(new Test());
+        Objects.requireNonNull(Bukkit.getPluginCommand("addlives")).setExecutor(new AddLives());
     }
 
     public static HardcoreMultiplayer get() {
@@ -139,24 +134,6 @@ public final class HardcoreMultiplayer extends JavaPlugin {
             this.graveConfig.save(this.gravesFile);
         } catch (IOException err) {
             err.printStackTrace();
-        }
-    }
-
-    //LoadArmorstands - Method
-    //Loads all grave-armorstands and corrects the modifiers
-    public void loadArmorstands()
-    {
-        //Loops through the graves and modifies the armorstand
-        for(String str: getGraveConfig().getConfigurationSection("").getKeys(false))
-        {
-            ArmorStand armorStand = (ArmorStand) Utils.getEntityFromUUID((UUID)getGraveConfig().get(str));
-            armorStand.setInvulnerable(true);
-            armorStand.setArms(true);
-            armorStand.setBasePlate(false);
-            armorStand.setCanMove(false);
-            armorStand.setCollidable(false);
-            armorStand.setGliding(false);
-            armorStand.setGlowing(true);
         }
     }
 }

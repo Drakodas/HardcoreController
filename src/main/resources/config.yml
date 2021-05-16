@@ -6,8 +6,12 @@ lives: 3
 items_revive:
   item_1: TOTEM_OF_UNDYING
   item_2: NETHER_STAR
-  item_3: GOLDEN_SWORD
-  item_4: DIAMOND
+#Refill items
+#Please use caps and the original Minecraft id/name
+#You can add as many items as you want
+items_refill:
+  item_1: TOTEM_OF_UNDYING
+  item_2: NETHER_STAR
 #Death sounds
 #Please use caps and the original Minecraft sound name
 sound_death:

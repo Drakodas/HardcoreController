@@ -16,12 +16,9 @@ import java.util.UUID;
 
 public class Utils {
     public static HashMap<UUID, Integer> lives = new HashMap<UUID, Integer>();
-    public static HashMap<UUID, UUID> graveArmorstand = new HashMap<UUID, UUID>();
-    public static HashMap<UUID, UUID> graveArmorstandName = new HashMap<UUID, UUID>();
+    public static HashMap<UUID, String> graveArmorstand = new HashMap<UUID, String>();
 
-    public Utils(){
-
-    }
+    public Utils(){    }
 
     public static int getLives(Player player) {
         if (!lives.containsKey(player.getUniqueId())) {
@@ -53,30 +50,16 @@ public class Utils {
         if (!graveArmorstand.containsKey(player.getUniqueId())) {
             graveArmorstand.put(player.getUniqueId(), getConfigGraveArmorstand(player));
         }
-        return (ArmorStand) getEntityFromUUID(graveArmorstand.get(player.getUniqueId()));
+        return (ArmorStand) getEntityFromUUID(UUID.fromString(graveArmorstand.get(player.getUniqueId())));
     }
 
-    public static ArmorStand getGraveArmorstandName(Player player) {
-        if (!graveArmorstandName.containsKey(player.getUniqueId())) {
-            graveArmorstandName.put(player.getUniqueId(), getConfigGraveArmorstandName(player));
-        }
-        return (ArmorStand) getEntityFromUUID(graveArmorstandName.get(player.getUniqueId()));
-    }
-
-    public static UUID getConfigGraveArmorstand(Player player) {
-        return (UUID) HardcoreMultiplayer.get().getGraveConfig().get(player.getUniqueId() + ".armorstand");
-    }
-
-    public static UUID getConfigGraveArmorstandName(Player player) {
-        return (UUID) HardcoreMultiplayer.get().getGraveConfig().get(player.getUniqueId() + ".armorstandName");
+    public static String getConfigGraveArmorstand(Player player) {
+        String uuidString = HardcoreMultiplayer.INSTANCE.getGraveConfig().getString(player.getUniqueId() + ".armorstand");
+        return uuidString;
     }
 
     public static void setGraveArmorstand(Player player, ArmorStand aS) {
-        graveArmorstand.put(player.getUniqueId(), aS.getUniqueId());
-    }
-
-    public static void setGraveArmorstandName(Player player, ArmorStand aS) {
-        graveArmorstandName.put(player.getUniqueId(), aS.getUniqueId());
+        graveArmorstand.put(player.getUniqueId(), aS.getUniqueId().toString());
     }
 
     public static ItemStack skullUUID(ItemStack item, UUID id) {
