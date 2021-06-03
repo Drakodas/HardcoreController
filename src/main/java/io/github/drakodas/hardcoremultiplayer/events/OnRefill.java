@@ -30,20 +30,26 @@ public class OnRefill implements Listener {
         //Getting config
         FileConfiguration conf = HardcoreMultiplayer.INSTANCE.getConfig();
 
-        if(item != null) {
-            //Looping trough all items in the config file
-            for (String str : conf.getConfigurationSection("items_refill").getKeys(false)) {
-                //If the item the player uses is equal to the item in the config file
-                //Add a live
-                if (item.equals(new ItemStack(Material.getMaterial(conf.getString("items_refill." + str))))) {
-                    //Commandbuilder
-                    //addlives and deletes item
-                    ConsoleCommandSender console = player.getServer().getConsoleSender();
-                    String command = "addlives " + player.getName() + " 1";
-                    Bukkit.dispatchCommand(console, command);
-
-                    item.subtract();
-                    return;
+        //If player is sneaking let them use the item
+        if(!player.isSneaking()) {
+            if (item != null) {
+                //Looping trough all items in the config file
+                for (String str : conf.getConfigurationSection("items_refill").getKeys(false)) {
+                    //If the item the player uses is equal to the item in the config file
+                    //Add a live
+                    if (item.equals(new ItemStack(Material.getMaterial(conf.getString("items_refill." + str))))) {
+                        //Commandbuilder
+                        //addlives and deletes item
+                        ConsoleCommandSender console = player.getServer().getConsoleSender();
+                        String command = "addlives " + player.getName() + " 1";
+                        if (Utils.getLives(player) < 3) {
+                            Bukkit.dispatchCommand(console, command);
+                            item.subtract();
+                        } else {
+                            Bukkit.dispatchCommand(console, command);
+                        }
+                        return;
+                    }
                 }
             }
         }

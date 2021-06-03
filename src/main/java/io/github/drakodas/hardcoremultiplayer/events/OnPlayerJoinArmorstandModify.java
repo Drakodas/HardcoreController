@@ -23,7 +23,7 @@ public class OnPlayerJoinArmorstandModify implements Listener{
         //Loops through the graves and modifies the armorstand
         for(String str: HardcoreMultiplayer.INSTANCE.getGraveConfig().getConfigurationSection("").getKeys(false))
         {
-            String uuidString = (String) HardcoreMultiplayer.get().getGraveConfig().get(str + ".armorstand");
+            String uuidString = (String) HardcoreMultiplayer.INSTANCE.getGraveConfig().get(str + ".armorstand");
 
             try
             {

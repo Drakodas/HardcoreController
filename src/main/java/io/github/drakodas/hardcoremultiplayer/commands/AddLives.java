@@ -37,7 +37,7 @@ public class AddLives implements CommandExecutor {
                 }
                 catch(NullPointerException npe) {
                     sender.sendMessage(HardcoreMultiplayer.PREFIX + "Player doesn't exist!");
-                    return true;
+                    return false;
                 }
                 amount = Integer.parseInt(args[1]);
                 if(amount > conf.getInt("lives"))
@@ -56,13 +56,14 @@ public class AddLives implements CommandExecutor {
                 Utils.setLives(player, amount + Utils.getLives(player));
                 player.sendTitle("§4You recieved a live", "Lives recieved: " + amount, 10,35, 10);
                 player.setPlayerListName(player.getName() + " " + Utils.lives.get(player.getUniqueId()) + "§4♥");
+                HardcoreMultiplayer.INSTANCE.saveHashmapData();
+                return true;
             }
-            HardcoreMultiplayer.INSTANCE.saveHashmapData();
         }
         else
         {
             sender.sendMessage(HardcoreMultiplayer.PREFIX + "Missing Permissions");
         }
-        return true;
+        return false;
     }
 }

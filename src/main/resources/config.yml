@@ -1,17 +1,22 @@
 #Default lives every player gets
 lives: 3
+
+#One player sleep
+one_player_sleep: true
+
 #Revive items
 #Please use caps and the original Minecraft id/name
 #You can add as many items as you want
 items_revive:
   item_1: TOTEM_OF_UNDYING
   item_2: NETHER_STAR
+
 #Refill items
 #Please use caps and the original Minecraft id/name
 #You can add as many items as you want
 items_refill:
-  item_1: TOTEM_OF_UNDYING
-  item_2: NETHER_STAR
+  item_1: WITHER_SKELETON_SKULL
+
 #Death sounds
 #Please use caps and the original Minecraft sound name
 sound_death:

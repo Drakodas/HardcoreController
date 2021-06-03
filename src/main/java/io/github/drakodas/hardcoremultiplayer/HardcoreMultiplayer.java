@@ -54,6 +54,12 @@ public final class HardcoreMultiplayer extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(PREFIX + text);
     }
 
+    //Message - Method
+    //Sends a message to the server
+    public void message(String text) {
+        Bukkit.broadcastMessage(PREFIX + text);
+    }
+
     //Register - Method
     //Registers Events and commands
     private void register() {
@@ -64,15 +70,12 @@ public final class HardcoreMultiplayer extends JavaPlugin {
         pluginManager.registerEvents(new OnRevive(), this);
         pluginManager.registerEvents(new OnRefill(), this);
         pluginManager.registerEvents(new OnMove(), this);
+        pluginManager.registerEvents(new OnSleep(), this);
         pluginManager.registerEvents(new OnPlayerJoinArmorstandModify(), this);
 
         //Registers Commands
         Objects.requireNonNull(Bukkit.getPluginCommand("revive")).setExecutor(new Revive());
         Objects.requireNonNull(Bukkit.getPluginCommand("addlives")).setExecutor(new AddLives());
-    }
-
-    public static HardcoreMultiplayer get() {
-        return INSTANCE;
     }
 
     public FileConfiguration getLivesConfig() {

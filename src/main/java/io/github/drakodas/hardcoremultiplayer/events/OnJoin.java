@@ -40,6 +40,7 @@ public class OnJoin implements Listener{
             player.setGameMode(GameMode.SPECTATOR);
             player.setPlayerListName(player.getName() +" §4DEAD" );
         }
+        HardcoreMultiplayer.INSTANCE.saveHashmapData();
     }
 
 }

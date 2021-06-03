@@ -29,7 +29,7 @@ public class Utils {
     }
 
     public static int getConfigLives(Player player) {
-        return HardcoreMultiplayer.get().getLivesConfig().getInt(player.getUniqueId() + ".lives");
+        return HardcoreMultiplayer.INSTANCE.getLivesConfig().getInt(player.getUniqueId() + ".lives");
     }
 
     public static void setLives(Player player, int i) {

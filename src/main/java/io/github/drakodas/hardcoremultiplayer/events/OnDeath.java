@@ -49,6 +49,7 @@ public class OnDeath implements Listener {
                 event.setCancelled(true);
                 Grave grave = new Grave(player);
                 grave.create();
+                player.dropItem(true);
                 for(ItemStack item: player.getInventory())
                 {
                     player.getInventory().setItemInMainHand(item);
